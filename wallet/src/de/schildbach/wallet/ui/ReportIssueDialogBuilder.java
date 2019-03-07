@@ -219,20 +219,21 @@ public abstract class ReportIssueDialogBuilder extends DialogBuilder implements 
         try {
 
             Intent gmailIntent = new Intent();
-            gmailIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
+            //gmailIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
 
             if (attachments.size() == 0) {
                 gmailIntent = new Intent(Intent.ACTION_SENDTO);
-                gmailIntent.setType("message/rfc822");
+                //gmailIntent.setType("message/rfc822");
             } else if (attachments.size() == 1) {
                 gmailIntent = new Intent(Intent.ACTION_SENDTO);
-                gmailIntent.setType("text/plain");
+                //gmailIntent.setType("text/plain");
                 gmailIntent.putExtra(Intent.EXTRA_STREAM, attachments.get(0));
             } else {
                 gmailIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-                gmailIntent.setType("text/plain");
+               // gmailIntent.setType("text/plain");
                 gmailIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, attachments);
             }
+            gmailIntent.setType("message/rfc822");
 
             gmailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { Constants.REPORT_EMAIL });
             if (subject != null)
